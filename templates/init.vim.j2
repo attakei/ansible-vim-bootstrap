@@ -7,7 +7,7 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+let vimplug_exists=expand('{{ neovim_config_dir }}/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = ""
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
@@ -19,14 +19,14 @@ if !filereadable(vimplug_exists)
   endif
   echo "Installing Vim-Plug..."
   echo ""
-  silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !\curl -fLo {{ neovim_config_dir }}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let g:not_finish_vimplug = "yes"
 
   autocmd VimEnter * PlugInstall
 endif
 
 " Required:
-call plug#begin(expand('~/.config/nvim/plugged'))
+call plug#begin(expand('{{ neovim_config_dir }}/plugged'))
 
 "*****************************************************************************
 "" Plug install packages
@@ -85,8 +85,8 @@ Plug 'tomasr/molokai'
 "*****************************************************************************
 
 "" Include user's extra bundle
-if filereadable(expand("~/.config/nvim/local_bundles.vim"))
-  source ~/.config/nvim/local_bundles.vim
+if filereadable(expand("{{ neovim_config_dir }}/local_bundles.vim"))
+  source {{ neovim_config_dir }}/local_bundles.vim
 endif
 
 call plug#end()
@@ -140,7 +140,7 @@ else
 endif
 
 " session management
-let g:session_directory = "~/.config/nvim/session"
+let g:session_directory = "{{ neovim_config_dir }}/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
@@ -437,8 +437,8 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 
 "" Include user's local vim config
-if filereadable(expand("~/.config/nvim/local_init.vim"))
-  source ~/.config/nvim/local_init.vim
+if filereadable(expand("{{ neovim_config_dir }}/local_init.vim"))
+  source {{ neovim_config_dir }}/local_init.vim
 endif
 
 "*****************************************************************************
