@@ -1,5 +1,6 @@
 ---
 # tasks file for neovim-bootstrap
+- include_tasks: install.yml
 - name: Create config directory
   file:
     path: '{{ neovim_config_dir }}'
