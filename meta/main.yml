@@ -10,8 +10,7 @@ galaxy_info:
   platforms:
     - name: MacOSX
       versions:
-        # TODO: expand more
-        - 10.13
+        - all
     - name: ArchLinux
       versions:
         - all
