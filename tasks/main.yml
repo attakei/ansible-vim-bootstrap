@@ -5,7 +5,7 @@
     path: '{{ neovim_config_path }}'
     state: directory
     recurse: yes
-- name: Copy file as init.vim
-  copy:
-    src: init.vim
+- name: Put config endpoint
+  template:
+    src: init.vim.j2
     dest: '{{ neovim_config_path }}/init.vim'
