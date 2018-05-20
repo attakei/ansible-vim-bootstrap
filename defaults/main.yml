@@ -1,2 +1,3 @@
 ---
 # defaults file for neovim-bootstrap
+neovim_config_path: '{{ ansible_env.HOME }}/.config/nvim'
