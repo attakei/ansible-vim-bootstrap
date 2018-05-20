@@ -9,7 +9,7 @@ endif
 
 let vimplug_exists=expand('{{ neovim_config_dir }}/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = ""
+let g:vim_bootstrap_langs = "{{ neovim_langs|join(',') }}"
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -80,6 +80,9 @@ Plug 'tomasr/molokai'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
+{% for lang in neovim_langs -%}
+execute 'source' fnameescape(expand('{{ neovim_config_dir }}/langs/{{ lang }}-bundle.vim'))
+{% endfor %}
 
 "*****************************************************************************
 "*****************************************************************************
@@ -432,6 +435,9 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
+{% for lang in neovim_langs -%}
+execute 'source' fnameescape(expand('{{ neovim_config_dir }}/langs/{{ lang }}-config.vim'))
+{% endfor %}
 
 "*****************************************************************************
 "*****************************************************************************
