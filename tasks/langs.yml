@@ -1,0 +1,15 @@
+- name: Create lang-config directory
+  file:
+    path: '{{ neovim_config_dir }}/langs'
+    state: directory
+    recurse: yes
+- name: Copy langs bundle file
+  copy:
+    src: '{{ item }}/bundle.vim'
+    dest: '{{ neovim_config_dir }}/langs/{{ item }}-bundle.vim'
+  with_items: '{{ neovim_langs }}'
+- name: Copy langs config file
+  copy:
+    src: '{{ item }}/config.vim'
+    dest: '{{ neovim_config_dir }}/langs/{{ item }}-config.vim'
+  with_items: '{{ neovim_langs }}'
