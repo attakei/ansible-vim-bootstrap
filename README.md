@@ -11,13 +11,7 @@ If you run this role for macOS, require [homebrew](https://brew.sh/).
 Support languages
 -----------------
 
-This role support these languages of vim-bootstrap.
-
-* html
-* javascript
-* python
-
-
+This role support all languages of vim-bootstrap.
 
 Role Variables
 --------------
