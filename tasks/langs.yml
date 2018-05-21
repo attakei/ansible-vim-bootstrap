@@ -5,11 +5,11 @@
     recurse: yes
 - name: Copy langs bundle file
   copy:
-    src: '{{ item }}/bundle.vim'
+    src: '{{ item }}/{{ item }}.vim'
     dest: '{{ neovim_config_dir }}/langs/{{ item }}-bundle.vim'
   with_items: '{{ neovim_langs }}'
 - name: Copy langs config file
   copy:
-    src: '{{ item }}/config.vim'
+    src: '{{ item }}/{{ item }}.vim'
     dest: '{{ neovim_config_dir }}/langs/{{ item }}-config.vim'
   with_items: '{{ neovim_langs }}'
