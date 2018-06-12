@@ -84,6 +84,10 @@ Plug 'tomasr/molokai'
 execute 'source' fnameescape(expand('{{ neovim_config_dir }}/langs/{{ lang }}-bundle.vim'))
 {% endfor %}
 
+{% for plugin in neovim_additional_plugins -%}
+Plug '{{ plugin }}'
+{% endfor %}
+
 "*****************************************************************************
 "*****************************************************************************
 
