@@ -7,10 +7,10 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-let vimplug_exists=expand('{{ neovim_config_dir }}/autoload/plug.vim')
+let vimplug_exists=expand('{{ vim_config_dir }}/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "{{ neovim_langs|join(',') }}"
-let g:vim_bootstrap_editor = "nvim"				" nvim or vim
+let g:vim_bootstrap_langs = "{{ vim_langs|join(',') }}"
+let g:vim_bootstrap_editor = "{% if vim_command == 'vim' %}vim{% else %}nvim{% endif %}"
 
 if !filereadable(vimplug_exists)
   if !executable("curl")
@@ -19,14 +19,14 @@ if !filereadable(vimplug_exists)
   endif
   echo "Installing Vim-Plug..."
   echo ""
-  silent !curl -fLo {{ neovim_config_dir }}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !curl -fLo {{ vim_config_dir }}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let g:not_finish_vimplug = "yes"
 
   autocmd VimEnter * PlugInstall
 endif
 
 " Required:
-call plug#begin(expand('{{ neovim_config_dir }}/plugged'))
+call plug#begin(expand('{{ vim_config_dir }}/plugged'))
 
 "*****************************************************************************
 "" Plug install packages
@@ -80,11 +80,11 @@ Plug 'tomasr/molokai'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
-{% for lang in neovim_langs -%}
-execute 'source' fnameescape(expand('{{ neovim_config_dir }}/langs/{{ lang }}-bundle.vim'))
+{% for lang in vim_langs -%}
+execute 'source' fnameescape(expand('{{ vim_config_dir }}/langs/{{ lang }}-bundle.vim'))
 {% endfor %}
 
-{% for plugin in neovim_additional_plugins -%}
+{% for plugin in vim_additional_plugins -%}
 Plug '{{ plugin }}'
 {% endfor %}
 
@@ -92,8 +92,8 @@ Plug '{{ plugin }}'
 "*****************************************************************************
 
 "" Include user's extra bundle
-if filereadable(expand("{{ neovim_config_dir }}/local_bundles.vim"))
-  source {{ neovim_config_dir }}/local_bundles.vim
+if filereadable(expand("{{ vim_config_dir }}/local_bundles.vim"))
+  source {{ vim_config_dir }}/local_bundles.vim
 endif
 
 call plug#end()
@@ -147,7 +147,7 @@ else
 endif
 
 " session management
-let g:session_directory = "{{ neovim_config_dir }}/session"
+let g:session_directory = "{{ vim_config_dir }}/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
@@ -439,16 +439,16 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
-{% for lang in neovim_langs -%}
-execute 'source' fnameescape(expand('{{ neovim_config_dir }}/langs/{{ lang }}-config.vim'))
+{% for lang in vim_langs -%}
+execute 'source' fnameescape(expand('{{ vim_config_dir }}/langs/{{ lang }}-config.vim'))
 {% endfor %}
 
 "*****************************************************************************
 "*****************************************************************************
 
 "" Include user's local vim config
-if filereadable(expand("{{ neovim_config_dir }}/local_init.vim"))
-  source {{ neovim_config_dir }}/local_init.vim
+if filereadable(expand("{{ vim_config_dir }}/local_init.vim"))
+  source {{ vim_config_dir }}/local_init.vim
 endif
 
 "*****************************************************************************
