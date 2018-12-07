@@ -1,7 +1,7 @@
 galaxy_info:
   author: Kazuya Takei
-  description: Installation NeoVim with vim-bootstrap
-  issue_tracker_url: https://github.com/attakei/ansible-neovim-bootstrap/issues
+  description: Configure vim-bootstrap
+  issue_tracker_url: https://github.com/attakei/ansible-vim-bootstrap/issues
   license: MIT
 
   # TODO: expand more
@@ -17,6 +17,7 @@ galaxy_info:
         - all
 
   galaxy_tags:
+    - vim
     - neovim
 
 dependencies: []
