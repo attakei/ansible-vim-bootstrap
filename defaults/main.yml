@@ -1,5 +1,6 @@
 ---
 # defaults file for neovim-bootstrap
-neovim_config_dir: '{{ ansible_env.HOME }}/.config/nvim'
-neovim_langs: []
-neovim_additional_plugins: []
+vim_command: vim
+vim_config_dir: '{{ ansible_env.HOME }}/.config/{{ vim_command }}'
+vim_langs: []
+vim_additional_plugins: []
