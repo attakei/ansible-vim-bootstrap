@@ -34,7 +34,7 @@ Simply usage: (Minimum config in vim-bootstrap)
 - hosts: localhost
   connection: local
   roles:
-    - attakei.vim-bootstrap
+    - attakei.vim_bootstrap
 ```
 
 For Python engineer (Case of specify language)
@@ -43,7 +43,7 @@ For Python engineer (Case of specify language)
 - hosts: localhost
   connection: local
   roles:
-    - role: attakei.vim-bootstrap
+    - role: attakei.vim_bootstrap
       neovim_langs:
         - python
 ```
