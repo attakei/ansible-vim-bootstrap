@@ -22,5 +22,6 @@
   template:
     src: init.vim.j2
     dest: '{{ vim_config_path }}'
+    backup: yes
 - include_tasks: langs.yml
   when: vim_langs
