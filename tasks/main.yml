@@ -1,14 +1,14 @@
 ---
 # tasks file for vim-bootstrap
 - fail:
-    msg: 'vim_config must be "vim" or "neovim"'
-  when: vim_command not in ['vim', 'neovim']
+    msg: 'vim_config must be "vim" or "nvim"'
+  when: vim_command not in ['vim', 'nvim']
 - include_tasks: install.yml
-  when: vim_command == 'neovim'
+  when: vim_command == 'nvim'
 - set_fact:
     vim_config_path: '{{ vim_config_dir }}/init.vim'
     vim_config_dir: '{{ ansible_env.HOME }}/.config/{{ vim_command }}'
-  when: vim_command == 'neovim'
+  when: vim_command == 'nvim'
 - set_fact:
     vim_config_path: '{{ ansible_env.HOME }}/.vim/vimrc'
     vim_config_dir: '{{ ansible_env.HOME }}/.vim'

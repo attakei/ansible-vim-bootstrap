@@ -16,7 +16,7 @@ This role support all languages of vim-bootstrap.
 Role Variables
 --------------
 
-* `vim_command`: Target vim command (`vim` or `neovim`)
+* `vim_command`: Target vim command (`vim` or `nvim`)
 * `vim_langs`: List of languages for vim-bootstrap
 
 Dependencies
