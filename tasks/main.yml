@@ -16,10 +16,15 @@
     path: '{{ vim_config_dir }}'
     state: directory
     recurse: yes
-- name: Put config endpoint
-  template:
-    src: init.vim.j2
+- name: Fetch new vimrc
+  uri:
+    url: https://vim-bootstrap.com/generate.vim
+    method: POST
+    body: 'editor={{ vim_command }}&{{ lookup("vim_bootstrap_post", vim_langs)|urlencode }}'
+    return_content: yes
+  register: vim_bootstrap_resp
+- name: Write out vimrc
+  copy:
     dest: '{{ vim_config_path }}'
+    content: '{{ vim_bootstrap_resp.content }}'
     backup: yes
-- include_tasks: langs.yml
-  when: vim_langs
