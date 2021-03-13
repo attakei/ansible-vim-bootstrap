@@ -1,7 +1,0 @@
-- name: Install for macOS
-  when: ansible_distribution == 'MacOSX'
-  homebrew: name=neovim
-- name: Install for ArchLinux
-  when: ansible_distribution == 'Archlinux'
-  become: yes
-  pacman: name=neovim
