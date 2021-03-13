@@ -28,3 +28,8 @@
     dest: '{{ vim_config_path }}'
     content: '{{ vim_bootstrap_resp.content }}'
     backup: yes
+- name: Write custom plugins
+  template:
+    src: local_bundles.vim.j2
+    dest: '{{ vim_config_dir}}/local_bundles.vim'
+  when: 'vim_additional_plugins|length > 0'
