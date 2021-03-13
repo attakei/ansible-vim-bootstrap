@@ -3,5 +3,7 @@
 vim_command: vim
 vim_config_dir: '{{ ansible_env.HOME }}/.config/{{ vim_command }}'
 vim_langs: []
+vim_frameworks: []
+vim_theme: ""
 vim_additional_plugins: []
 vim_extra_config: ""

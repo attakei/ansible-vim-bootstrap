@@ -20,7 +20,7 @@
   uri:
     url: https://vim-bootstrap.com/generate.vim
     method: POST
-    body: 'editor={{ vim_command }}&{{ lookup("vim_bootstrap_post", vim_langs)|urlencode }}'
+    body: '{{ lookup("vim_bootstrap_post", vim_langs, vim_frameworks, vim_theme, vim_command)|urlencode }}'
     return_content: yes
   register: vim_bootstrap_resp
 - name: Write out vimrc
