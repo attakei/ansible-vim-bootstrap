@@ -4,12 +4,14 @@
     msg: 'vim_config must be "vim" or "nvim"'
   when: vim_command not in ['vim', 'nvim']
 - set_fact:
-    vim_config_path: '{{ vim_config_dir }}/init.vim'
     vim_config_dir: '{{ ansible_env.HOME }}/.config/{{ vim_command }}'
+    vim_config_path: '{{ vim_config_dir }}/init.vim'
+    vim_localbundles_path: '{{ vim_config_dir }}/local_bundles.vim'
   when: vim_command == 'nvim'
 - set_fact:
     vim_config_path: '{{ ansible_env.HOME }}/.vim/vimrc'
     vim_config_dir: '{{ ansible_env.HOME }}/.vim'
+    vim_localbundles_path: '{{ ansible_env.HOME }}/.vimrc.local.bundles'
   when: vim_command == 'vim'
 - name: Create config directory
   file:
@@ -31,5 +33,5 @@
 - name: Write custom plugins
   template:
     src: local_bundles.vim.j2
-    dest: '{{ vim_config_dir}}/local_bundles.vim'
+    dest: '{{ vim_localbundles_path}}'
   when: 'vim_additional_plugins|length > 0'
