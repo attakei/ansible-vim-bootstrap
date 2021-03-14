@@ -3,25 +3,35 @@
 - fail:
     msg: 'vim_config must be "vim" or "nvim"'
   when: vim_command not in ['vim', 'nvim']
-- include_tasks: install.yml
-  when: vim_command == 'nvim'
 - set_fact:
-    vim_config_path: '{{ vim_config_dir }}/init.vim'
     vim_config_dir: '{{ ansible_env.HOME }}/.config/{{ vim_command }}'
+    vim_config_path: '{{ vim_config_dir }}/init.vim'
+    vim_localbundles_path: '{{ vim_config_dir }}/local_bundles.vim'
   when: vim_command == 'nvim'
 - set_fact:
     vim_config_path: '{{ ansible_env.HOME }}/.vim/vimrc'
     vim_config_dir: '{{ ansible_env.HOME }}/.vim'
+    vim_localbundles_path: '{{ ansible_env.HOME }}/.vimrc.local.bundles'
   when: vim_command == 'vim'
 - name: Create config directory
   file:
     path: '{{ vim_config_dir }}'
     state: directory
     recurse: yes
-- name: Put config endpoint
-  template:
-    src: init.vim.j2
+- name: Fetch new vimrc
+  uri:
+    url: https://vim-bootstrap.com/generate.vim
+    method: POST
+    body: '{{ lookup("vim_bootstrap_post", vim_langs, vim_frameworks, vim_theme, vim_command)|urlencode }}'
+    return_content: yes
+  register: vim_bootstrap_resp
+- name: Write out vimrc
+  copy:
     dest: '{{ vim_config_path }}'
+    content: '{{ vim_bootstrap_resp.content }}'
     backup: yes
-- include_tasks: langs.yml
-  when: vim_langs
+- name: Write custom plugins
+  template:
+    src: local_bundles.vim.j2
+    dest: '{{ vim_localbundles_path}}'
+  when: 'vim_additional_plugins|length > 0'
