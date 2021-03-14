@@ -6,7 +6,7 @@ Configure vimrc for vim-bootstrap.
 Requirements
 ------------
 
-If you run this role for macOS, require [homebrew](https://brew.sh/).
+None.
 
 Support languages
 -----------------
@@ -17,7 +17,10 @@ Role Variables
 --------------
 
 * `vim_command`: Target vim command (`vim` or `nvim`)
-* `vim_langs`: List of languages for vim-bootstrap
+* `vim_langs`: List of languages supported from vim-bootstrap
+* `vim_frameworks`: List of frameworks supported from vim-bootstrap
+* `vim_theme`: Vim color theme supported from vim-boostrap
+* `vim_additional_plugins`: List of plugins that you want to use
 
 Dependencies
 ------------
@@ -44,7 +47,7 @@ For Python engineer (Case of specify language)
   connection: local
   roles:
     - role: attakei.vim_bootstrap
-      neovim_langs:
+      vim_langs:
         - python
 ```
 
@@ -59,4 +62,3 @@ Thanks
 ------
 
 * [Vim Bootstrap](https://vim-bootstrap.com/)
-  * Original of configs
