@@ -7,3 +7,4 @@ vim_frameworks: []
 vim_theme: ""
 vim_additional_plugins: []
 vim_extra_config: ""
+vim_bootstrap_backup: true
